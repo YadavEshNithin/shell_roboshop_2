@@ -99,6 +99,17 @@ python_setup(){
     VALIDATE $? "python dependencies installing"
 }
 
+go_setup(){
+    dnf install golang -y
+    VALIDATE $? "installing golang"
+
+
+    go mod init dispatch
+    go get 
+    go build
+    VALIDATE $? "go dependencies installing"
+}
+
 systemd_setup(){
     cp $SCRIPT_DIR/$app_name.service /etc/systemd/system/$app_name.service
     VALIDATE $? "Copying $app_name service"
